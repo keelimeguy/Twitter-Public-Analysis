@@ -1,55 +1,63 @@
+import nltk
+
+nltk.download('vader_lexicon')
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
+NLTK_SENTIMENT_INTENSITY_ANALYZER = SentimentIntensityAnalyzer()
+
+from textblob import TextBlob
+
+import flair
+
+flair_sentiment = flair.models.TextClassifier.load('en-sentiment')
+
 """
 Author: v2thegreat
 
+Source: https://medium.com/@b.terryjack/nlp-pre-trained-sentiment-analysis-1eb52a9d742c
+
 Libraries Used:
  - NLTK
- - SpaCy
  - TextBlob
- - Stanford CoreNLP
- - Gensim
+ - Flair
 """
 
 
 def sentiment_analysis_nltk(text: str) -> float:
     """
-    Run sentiment analysis using the library NLTK. Returns default sentiment
+    Run sentiment analysis using the library NLTK. Runs default sentiment on vader lexicon
     :param text:
-    :return: sentiment for given text
+    :return: sentiment compound for given text
     """
-    return 0.0
-
-
-def sentiment_analysis_spacy(text: str) -> float:
-    """
-    Run sentiment analysis using the library NLTK. Returns default sentiment
-    :param text: text to be analysed
-    :return: sentiment for given text
-    """
-    return 0.0
+    return NLTK_SENTIMENT_INTENSITY_ANALYZER.polarity_scores(text=text)['compound']
 
 
 def sentiment_analysis_textblob(text: str) -> float:
     """
-    Run sentiment analysis using the library NLTK. Returns default sentiment
+    Run sentiment analysis using the library textblob. Returns default sentiment
     :param text: text to be analysed
     :return: sentiment for given text
     """
-    return 0.0
+    return TextBlob(text=text).sentiment.polarity
 
 
-def sentiment_analysis_stanford_core_nlp(text: str) -> float:
+def sentiment_analysis_flair(text: str) -> float:
     """
-    Run sentiment analysis using the library NLTK. Returns default sentiment
+    Run sentiment analysis using the library flair. Returns default sentiment
     :param text: text to be analysed
     :return: sentiment for given text
     """
-    return 0.0
+    s = flair.data.Sentence(text)
+    flair_sentiment.predict(s)
+    total_sentiment = s.labels
+    if total_sentiment[0].value == 'NEGATIVE':
+        return total_sentiment[0].score * -1
+    else:
+        return total_sentiment[0].score
 
 
-def sentiment_analysis_gensim(text: str) -> float:
-    """
-    Run sentiment analysis using the library NLTK. Returns default sentiment
-    :param text: text to be analysed
-    :return: sentiment for given text
-    """
-    return 0.0
+if __name__ == "__main__":
+    sentence = 'The world is not a good place'
+    print(sentiment_analysis_nltk(sentence))
+    print(sentiment_analysis_textblob(sentence))
+    print(sentiment_analysis_flair(sentence))
