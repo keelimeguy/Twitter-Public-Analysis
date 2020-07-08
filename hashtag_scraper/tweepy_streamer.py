@@ -4,13 +4,12 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from textblob import TextBlob
-
-
 from hashtag_scraper import twitter_credentials
 import numpy as np
 import pandas as pd
 import re
 import matplotlib.pyplot as plt
+
 
 class TwitterClient():
     def __init__(self, twitter_user=None):
@@ -98,6 +97,7 @@ class TwitterListener(StreamListener):
 
         print(status)
 
+
 class TweetAnalyzer():
 
     def tweets_to_data_frame(self, tweets):
@@ -133,11 +133,11 @@ class TweetAnalyzer():
         analysis_pure = TextBlob(self.clean_tweet(tweet))
         return analysis_pure.sentiment.subjectivity
 
+
 if __name__ == "__main__":
     twitter_client = TwitterClient()
     tweet_analyzer = TweetAnalyzer()
     api = twitter_client.get_twitter_client_api()
-
 
     # Get trending topics
     trends1 = api.trends_place(id=2388929)
@@ -153,8 +153,7 @@ if __name__ == "__main__":
     tweets = api.search(q='Drake', count=200)
     df = tweet_analyzer.tweets_to_data_frame(tweets)
     df["sentiment"] = np.array([tweet_analyzer.analyze_sentiment_cat(tweet) for tweet in df['tweets']])
-    plt.figure(figsize=(15,15))
+    plt.figure(figsize=(15, 15))
     plt.hist(df["sentiment"])
     # df.to_csv('tweets.csv')
     print(df)
-
