@@ -4,7 +4,9 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from textblob import TextBlob
+
 from hashtag_scraper import twitter_credentials
+
 import numpy as np
 import pandas as pd
 import re
