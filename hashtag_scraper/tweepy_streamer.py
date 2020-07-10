@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 
 
 class TwitterClient():
+
     def __init__(self, twitter_user=None):
         self.auth = TwitterAuthenticator().authenticate_twitter_app()
         self.twitter_client = API(self.auth)
@@ -147,15 +148,19 @@ if __name__ == "__main__":
     # grab the trends
     trends = data['trends']
     # grab the name from each trend
-    names = [trend['name'] for trend in trends]
-    volume = [trend['tweet_volume'] for trend in trends]
-    trending = dict(zip(names, volume))
-    print(trending)
+    names = [trend['name'] for trend in trends[:2]]
+    print(names)
+    trending = {}
+    num_tweets = 3
+    temp = []
+    tweets = []
+    for i in names:
+        temp = api.search(q=i, count=num_tweets)
+        for j in range(0, num_tweets):
+            tweets.append(temp[j].text)
 
-    tweets = api.search(q='Drake', count=200)
-    df = tweet_analyzer.tweets_to_data_frame(tweets)
-    df["sentiment"] = np.array([tweet_analyzer.analyze_sentiment_cat(tweet) for tweet in df['tweets']])
-    plt.figure(figsize=(15, 15))
-    plt.hist(df["sentiment"])
-    # df.to_csv('tweets.csv')
-    print(df)
+        trending[i] = tweets
+
+
+
+    print(trending)
