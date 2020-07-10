@@ -1,16 +1,16 @@
 import pandas as pd
 from tqdm import tqdm
 
-from sentiment_analysis_tools import Sentiments, _sentiment_functions
+from sentiment_analysis_tools import Sentiments
 
-tweets_dict = {'abcd': ['I hate this website', 'I hate you!']}
+tweets_dict = {'abcd': ['The world is not a good place', 'I hate you!']}
 
 all_topics = []
 all_tweets = []
 
 for topic in tqdm(tweets_dict.keys()):
-    all_topics.extend(tweets_dict[topic])
-    all_tweets.extend([topic] * len(tweets_dict[topic]))
+    all_topics.extend([topic] * len(tweets_dict[topic]))
+    all_tweets.extend(tweets_dict[topic])
 
 dataframe = {'topic_name': all_topics, 'tweets': all_tweets}
 

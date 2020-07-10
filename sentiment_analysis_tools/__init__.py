@@ -63,7 +63,6 @@ class Sentiments:
 
     @staticmethod
     def multiple_sentiment_analysis(text: str) -> Dict[str, float]:
-        print(text)
         return {sentiment: _sentiment_functions[sentiment](text) for sentiment in _sentiment_functions.keys()}
 
 
