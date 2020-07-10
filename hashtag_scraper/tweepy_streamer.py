@@ -2,11 +2,15 @@ from tweepy import API
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
+import re
 
 
 from hashtag_scraper import twitter_credentials
 
-
+# Function to clean a tweet of special characters and hyperlinks
+def clean_tweet(tweet):
+    # Removing the special characters and hyperlinks from the tweet text
+    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z\t])|(\w+:\/\/\S+)", " ", tweet).split())
 
 class TwitterClient():
 
@@ -17,6 +21,7 @@ class TwitterClient():
 
     def get_twitter_client_api(self):
         return self.twitter_client
+
 
 
 class TwitterAuthenticator():
@@ -99,7 +104,7 @@ if __name__ == "__main__":
         # print(temp[0].text)
 
         for j in range(0, num_tweets):
-            tweets.append(temp[j].text)
+            tweets.append(clean_tweet(temp[j].text))
         trending[i] = tweets
 
     print(trending)
