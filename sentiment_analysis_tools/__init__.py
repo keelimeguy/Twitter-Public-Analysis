@@ -1,4 +1,4 @@
-from typing import Generator, Any
+from typing import Dict
 
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
@@ -61,15 +61,17 @@ class Sentiments:
         else:
             return total_sentiment[0].score
 
-    _sentiment_functions = [
-        sentiment_analysis_nltk,
-        sentiment_analysis_textblob,
-        sentiment_analysis_flair
-    ]
-
     @staticmethod
-    def multiple_sentiment_analysis(text: str) -> Generator[Any, Any, None]:
-        return (sentiment(text) for sentiment in Sentiments._sentiment_functions)
+    def multiple_sentiment_analysis(text: str) -> Dict[str, float]:
+        print(text)
+        return {sentiment: _sentiment_functions[sentiment](text) for sentiment in _sentiment_functions.keys()}
+
+
+_sentiment_functions = {
+    'nltk': Sentiments.sentiment_analysis_nltk,
+    'textblob': Sentiments.sentiment_analysis_textblob,
+    'flair': Sentiments.sentiment_analysis_flair
+}
 
 if __name__ == "__main__":
     sentence = 'The world is not a good place'
