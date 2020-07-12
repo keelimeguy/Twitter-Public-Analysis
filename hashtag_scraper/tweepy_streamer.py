@@ -11,26 +11,25 @@ def clean_tweet(tweet):
     # Removing the special characters and hyperlinks from the tweet text
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z\t])|(\w+:\/\/\S+)", " ", tweet).split())
 
-def fetch_tweets():
+def fetch_tweets(num_topics, num_tweets, geo_code=2388929):
     #
     twitter_client = TwitterClient()
     api = twitter_client.get_twitter_client_api()
 
     # Get trending topics per Geo location ID
-    trends1 = api.trends_place(id=2388929)
+    trends1 = api.trends_place(id=geo_code)
     data = trends1[0]
 
     # grab the trends
     trends = data['trends']
 
     # grab the name from each trend
-    names = [trend['name'] for trend in trends[:10]]
+    names = [trend['name'] for trend in trends[:num_topics]]
 
     # Debug => prints trending list
     # print(names)
 
     # number of tweets to be gathered per trending topic
-    num_tweets = 10
 
     # Initialize dict for trending topic and respective tweets
     trending = {}
