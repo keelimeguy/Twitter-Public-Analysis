@@ -24,13 +24,13 @@ def fetch_tweets():
     trends = data['trends']
 
     # grab the name from each trend
-    names = [trend['name'] for trend in trends[:2]]
+    names = [trend['name'] for trend in trends[:10]]
 
     # Debug => prints trending list
     # print(names)
 
     # number of tweets to be gathered per trending topic
-    num_tweets = 5
+    num_tweets = 10
 
     # Initialize dict for trending topic and respective tweets
     trending = {}
