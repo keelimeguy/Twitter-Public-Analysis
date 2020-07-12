@@ -20,4 +20,4 @@ sentiments['tweets'] = dataframe['tweets']
 sentiments['topic_name'] = dataframe['topic_name']
 
 if __name__ == "__main__":
-    print(sentiments)
+    print(sentiments.groupby('topic_name').agg('mean'))
