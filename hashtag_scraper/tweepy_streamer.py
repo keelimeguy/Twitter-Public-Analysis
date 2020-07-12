@@ -2,55 +2,9 @@ from tweepy import API
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
-import re
-import time
 
 
 from hashtag_scraper import twitter_credentials
-
-# Function to clean a tweet of special characters and hyperlinks
-def clean_tweet(tweet):
-    # Removing the special characters and hyperlinks from the tweet text
-    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z\t])|(\w+:\/\/\S+)", " ", tweet).split())
-
-def fetch_tweets():
-    #
-    twitter_client = TwitterClient()
-    api = twitter_client.get_twitter_client_api()
-
-    # Get trending topics per Geo location ID
-    trends1 = api.trends_place(id=2388929)
-    data = trends1[0]
-
-    # grab the trends
-    trends = data['trends']
-
-    # grab the name from each trend
-    names = [trend['name'] for trend in trends[:10]]
-
-    # Debug => prints trending list
-    # print(names)
-
-    # number of tweets to be gathered per trending topic
-    num_tweets = 25
-
-    # Initialize dict for trending topic and respective tweets
-    trending = {}
-    temp = []
-    tweets = []
-
-    # Nest loop for searching each trending topic and then inserting those tweets into 'trending' dict
-    for i in names:
-        temp = api.search(q=i, count=num_tweets+1)
-
-        # Debug => prints text content of tweet of specified index
-        # print(temp[0].text)
-
-        for j in range(0, num_tweets):
-            tweets.append(clean_tweet(temp[j].text))
-        trending[i] = tweets
-
-    print(trending)
 
 
 
@@ -63,7 +17,6 @@ class TwitterClient():
 
     def get_twitter_client_api(self):
         return self.twitter_client
-
 
 
 class TwitterAuthenticator():
@@ -111,3 +64,42 @@ class TwitterListener(StreamListener):
 
         print(status)
 
+
+if __name__ == "__main__":
+    #
+    twitter_client = TwitterClient()
+    api = twitter_client.get_twitter_client_api()
+
+    # Get trending topics per Geo location ID
+    trends1 = api.trends_place(id=2388929)
+    data = trends1[0]
+
+    # grab the trends
+    trends = data['trends']
+
+    # grab the name from each trend
+    names = [trend['name'] for trend in trends[:2]]
+
+    # Debug => prints trending list
+    # print(names)
+
+    # number of tweets to be gathered per trending topic
+    num_tweets = 5
+
+    # Initialize dict for trending topic and respective tweets
+    trending = {}
+    temp = []
+    tweets = []
+
+    # Nest loop for searching each trending topic and then inserting those tweets into 'trending' dict
+    for i in names:
+        temp = api.search(q=i, count=num_tweets+1)
+
+        # Debug => prints text content of tweet of specified index
+        # print(temp[0].text)
+
+        for j in range(0, num_tweets):
+            tweets.append(temp[j].text)
+        trending[i] = tweets
+
+    print(trending)
