@@ -17,7 +17,7 @@ def clean_tweet(tweet):
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z\t])|(\w+:\/\/\S+)", " ", tweet).split())
 
 
-def fetch_tweets(num_topics, num_tweets, geo_code=2388929):
+def fetch_tweets(num_topics, num_tweets, geo_code=2388929, clean_bool=True):
     """
     Fetches a number of tweets on a specified number of trending topics using a particular geo code.
 
@@ -57,7 +57,13 @@ def fetch_tweets(num_topics, num_tweets, geo_code=2388929):
         # print(temp[0].text)
 
         for j in range(0, num_tweets):
-            tweets.append(clean_tweet(temp[j].text))
+            if clean_bool == True:
+                tweets.append(clean_tweet(temp[j].text))
+            elif clean_bool == False:
+                tweets.append(temp[j].text)
+            else:
+                tweets.append(temp[j].text)
+
         trending[i] = tweets
 
     print(trending)
