@@ -1,4 +1,4 @@
-# twitter-sentiment-analysis
+# Twitter-Public-Analysis
 
 Hey! We're working on making a twitter analysis tool that can analyse tweets in real time and give us valuble insights
 
