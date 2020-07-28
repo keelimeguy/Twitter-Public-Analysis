@@ -3,7 +3,14 @@ from tqdm import tqdm
 from sentiment_analysis_tools import Sentiments
 from hashtag_scraper import tweepy_streamer
 
-tweets_dict = tweepy_streamer.fetch_tweets(2, 10)
+print('\nFetching tweets, this might take a moment')
+
+TOPICS_COUNT = 3
+NUMBER_OF_TWEETS_PER_TOPIC = 20
+tweets_dict = tweepy_streamer.fetch_tweets(TOPICS_COUNT, NUMBER_OF_TWEETS_PER_TOPIC)
+
+tweets_count = len(tweets_dict[list(tweets_dict.keys())[0]])
+print(f"\nGot {tweets_count} tweets for each topic (estimated based on sample)")
 
 all_topics = []
 all_tweets = []
@@ -15,7 +22,8 @@ for topic in tweets_dict.keys():
 topics_tweets_dataframe = {'topic_name': all_topics, 'tweets': all_tweets}
 
 sentiments = pd.DataFrame([Sentiments.multiple_sentiment_analysis(tweet) for tweet in
-                           tqdm(topics_tweets_dataframe['tweets'])])
+                           tqdm(topics_tweets_dataframe['tweets'],
+                                desc='Running Sentiment Analysis')])
 
 sentiments['tweets'] = topics_tweets_dataframe['tweets']
 sentiments['topic_name'] = topics_tweets_dataframe['topic_name']
