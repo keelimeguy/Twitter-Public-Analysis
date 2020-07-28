@@ -2,3 +2,4 @@ flair
 textblob
 nltk
 tqdm
+pyyaml
