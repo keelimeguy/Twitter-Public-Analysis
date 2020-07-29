@@ -56,10 +56,13 @@ class Sentiments:
         s = flair.data.Sentence(text)
         flair_sentiment.predict(s)
         total_sentiment = s.labels
-        if total_sentiment[0].value == 'NEGATIVE':
-            return total_sentiment[0].score * -1
-        else:
-            return total_sentiment[0].score
+        try:
+            if total_sentiment[0].value == 'NEGATIVE':
+                return total_sentiment[0].score * -1
+            else:
+                return total_sentiment[0].score
+        except IndexError: # Consider sentiment to be null when it gets empty string
+            return 0
 
     @staticmethod
     def multiple_sentiment_analysis(text: str) -> Dict[str, float]:
