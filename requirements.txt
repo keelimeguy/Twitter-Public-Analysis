@@ -1,5 +1,8 @@
 flair
 textblob
 nltk
+matplotlib
 tqdm
+tweepy
+pandas
 pyyaml
