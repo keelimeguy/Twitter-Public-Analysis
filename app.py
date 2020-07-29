@@ -5,12 +5,13 @@ from hashtag_scraper import tweepy_streamer
 
 print('\nFetching tweets, this might take a moment')
 
-TOPICS_COUNT = 3
-NUMBER_OF_TWEETS_PER_TOPIC = 20
+TOPICS_COUNT = 5
+NUMBER_OF_TWEETS_PER_TOPIC = 100
 tweets_dict = tweepy_streamer.fetch_tweets(TOPICS_COUNT, NUMBER_OF_TWEETS_PER_TOPIC)
 
-tweets_count = len(tweets_dict[list(tweets_dict.keys())[0]])
-print(f"\nGot {tweets_count} tweets for each topic (estimated based on sample)")
+tweets_count = sum([len(tweets_dict[list(tweets_dict.keys())[x]]) for x in range(TOPICS_COUNT)])
+tweets_count = tweets_count / TOPICS_COUNT
+print(f"\nGot {tweets_count} tweets for each topic. Originally tried to get {NUMBER_OF_TWEETS_PER_TOPIC} per topic")
 
 all_topics = []
 all_tweets = []
@@ -29,4 +30,4 @@ sentiments['tweets'] = topics_tweets_dataframe['tweets']
 sentiments['topic_name'] = topics_tweets_dataframe['topic_name']
 
 if __name__ == "__main__":
-    print(sentiments.groupby('topic_name').agg('mean'))
+    print(sentiments.groupby('topic_name').agg(['mean', 'min', 'max']).to_string())
