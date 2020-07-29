@@ -151,7 +151,7 @@ def fetch_tweets(num_topics: int, num_tweets: int, geo_code: int = 2388929,
         # Debug => prints text content of tweet of specified index
         # print(temp[0].text)
 
-        for j in range(num_tweets):
+        for j in range(len(temp)):
             if clean_tweets:
                 tweets.append(_clean_tweet(temp[j].text))
             else:
@@ -163,4 +163,6 @@ def fetch_tweets(num_topics: int, num_tweets: int, geo_code: int = 2388929,
 
 
 if __name__ == '__main__':
-    pass
+    tweets = fetch_tweets(2, 10, clean_tweets=False)
+    print(tweets[list(tweets.keys())[0]] == tweets[list(tweets.keys())[1]])
+    print(len(tweets[list(tweets.keys())[1]]))# == tweets[list(tweets.keys())[1]])
