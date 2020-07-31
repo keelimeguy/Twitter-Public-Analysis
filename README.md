@@ -19,3 +19,7 @@ Getting started shouldn't be too hard. Here are the steps:
 3. Configure the twitter settings
 
 Follow the steps [here](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/blob/master/config/README.md) to add your twitter credentials. Don't worry, we're working on removing this step
+
+4. Actually getting it running
+
+`python sentiment_analysis_app.py`
