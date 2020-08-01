@@ -29,9 +29,9 @@ def _format_tweets(tweets_dict):
 
 
 def _get_sentiments(topics_tweets_dict):
-    sentiments = pd.DataFrame([Sentiments.multiple_sentiment_analysis(tweet) for tweet in
-                               tqdm(topics_tweets_dict['tweets'],
-                                    desc='Running Sentiment Analysis')])
+    sentiments_progress_bar = tqdm(topics_tweets_dict['tweets'], desc='Running Sentiment Analysis')
+    sentiments = [Sentiments.multiple_sentiment_analysis(tweet) for tweet in sentiments_progress_bar]
+    sentiments = pd.DataFrame(sentiments)
 
     sentiments['tweets'] = topics_tweets_dict['tweets']
     sentiments['topic_name'] = topics_tweets_dict['topic_name']
@@ -43,8 +43,7 @@ def run_sentiment_analysis(topics_count: int = TOPICS_COUNT,
                            number_of_tweets_per_topic: int = TWEETS_COUNT,
                            clean_tweets=True) -> str:
     print('\nFetching tweets, this might take a moment')
-    tweets_dict = tweepy_streamer.fetch_tweets(topics_count, number_of_tweets_per_topic,
-                                               clean_tweets=clean_tweets)
+    tweets_dict = tweepy_streamer.fetch_tweets(topics_count, number_of_tweets_per_topic, clean_tweets=clean_tweets)
 
     print(f"\nGot {_get_average_tweets_per_topic(tweets_dict, topics_count)} tweets for each topic."
           f" Originally tried to get {number_of_tweets_per_topic} per topic")
