@@ -22,4 +22,20 @@ Follow the steps [here](https://github.com/Twitter-Public-Analysis/Twitter-Publi
 
 4. Actually getting it running
 
-`python sentiment_analysis_app.py`
+`python sentiment_analysis_app.py --topic-counts 3 --tweets-count 100 --clean-tweets True`
+
+4.5 Here's the `help` from the sentiment analysis app:
+```
+usage: sentiment_analysis_app.py [-h] [--topic-counts TOPICS_COUNT]
+                                 [--tweets-count TWEETS_COUNT]
+                                 [--clean-tweets CLEAN_TWEETS]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --topic-counts TOPICS_COUNT
+                        number of topics to download for
+  --tweets-count TWEETS_COUNT
+                        number of tweets to grab per topic
+  --clean-tweets CLEAN_TWEETS
+                        clean the tweets before analyzing them
+```
