@@ -1,9 +1,9 @@
-import re
 from tweepy import API
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from config import config
+from hashtag_scraper.services.TweetCleaningService import TweetFormatting
 
 
 class _TwitterClient:
@@ -101,15 +101,6 @@ class _TwitterListener(StreamListener):
         print(status)
 
 
-def _clean_tweet(tweet):
-    """
-    Cleans the tweet using regular expression for special characters or hyperlinks.
-
-    :param tweet: text to be processed
-    :return: text without special characters or hyperlinks
-    """
-    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z\t])|(\w+:\/\/\S+)", " ", tweet).split())
-
 
 def fetch_tweets(num_topics: int, num_tweets: int, geo_code: int = 2388929,
                  clean_tweets: bool = True):
@@ -146,23 +137,23 @@ def fetch_tweets(num_topics: int, num_tweets: int, geo_code: int = 2388929,
 
     # Nest loop for searching each trending topic and then inserting those tweets into 'trending' dict
     for name in names:
-        tweets = []
+        new_tweets = []
         temp = api.search(q=name, count=num_tweets + 1)
         # Debug => prints text content of tweet of specified index
         # print(temp[0].text)
 
         for j in range(len(temp)):
             if clean_tweets:
-                tweets.append(_clean_tweet(temp[j].text))
+                new_tweets.append(TweetFormatting.clean_tweet(temp[j].text))
             else:
-                tweets.append(temp[j].text)
+                new_tweets.append(temp[j].text)
 
-        trending[name] = tweets
+        trending[name] = new_tweets
 
     return trending
 
 
 if __name__ == '__main__':
-    tweets = fetch_tweets(2, 10, clean_tweets=False)
+    tweets = fetch_tweets(2, 10, clean_tweets=True)
     print(tweets[list(tweets.keys())[0]] == tweets[list(tweets.keys())[1]])
     print(len(tweets[list(tweets.keys())[1]]))# == tweets[list(tweets.keys())[1]])
