@@ -5,7 +5,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
 import flair
 
-nltk.download('vader_lexicon')
+nltk.download('vader_lexicon', quiet=True)
 NLTK_SENTIMENT_INTENSITY_ANALYZER = SentimentIntensityAnalyzer()
 flair_sentiment = flair.models.TextClassifier.load('en-sentiment')
 
