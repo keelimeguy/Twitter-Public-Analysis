@@ -5,7 +5,7 @@ from queue import Queue
 from threading import Thread
 import time
 
-from dozent.download import download_axel
+from Dozent.DownloaderTools import download_axel
 
 
 class DownloadWorker(Thread):
@@ -60,8 +60,8 @@ class Dozent:
                 queue.put(dict['link'])
             queue.join()
 
-
-current_time = time.time()
-d = Dozent(datetime.datetime(2012, 1, 1), datetime.datetime(2012, 5, 1))
-d.download_timeframe()
-print(f"Download Time: {time.time() - current_time} seconds.")
+if __name__ == "__main__":
+    current_time = time.time()
+    d = Dozent(datetime.datetime(2012, 1, 1), datetime.datetime(2012, 5, 1))
+    d.download_timeframe()
+    print(f"Download Time: {time.time() - current_time} seconds.")
