@@ -5,10 +5,10 @@ from queue import Queue
 from threading import Thread
 import time
 
-from Dozent.DownloaderTools import download_axel
+from Dozent.DownloaderTools import DownloaderTools
 
 
-class DownloadWorker(Thread):
+class _DownloadWorker(Thread):
 
     def __init__(self, queue):
         Thread.__init__(self)
@@ -19,7 +19,7 @@ class DownloadWorker(Thread):
             # Get the work from the queue and expand the tuple
             link = self.queue.get()
             try:
-                download_axel(link)
+                DownloaderTools.download_axel(link)
             finally:
                 self.queue.task_done()
 
@@ -41,24 +41,22 @@ class Dozent:
             queue = Queue()
 
             for x in range(multiprocessing.cpu_count()):
-                worker = DownloadWorker(queue)
-                # Setting daemon to True will let the main thread exit even though the workers are blocking
-                worker.daemon = True
+                worker = _DownloadWorker(queue)
+                worker.daemon = True  # Setting daemon to True will let the main thread exit even though the workers are blocking
                 worker.start()
 
             data = json.loads(file.read())
 
-            start_index = data.index(next(filter(lambda link: (int(link['month']) == self.start_date.month) and (
-                        int(link['year']) == self.start_date.year), data)))
-            end_index = data.index(next(filter(
-                lambda link: (int(link['month']) == self.end_date.month) and (int(link['year']) == self.end_date.year),
-                data)))
+            start_index = data.index(
+                next(filter(lambda link: (int(link['month']) == self.start_date.month) and (int(link['year']) == self.start_date.year), data)))
+            end_index = data.index(next(filter(lambda link: (int(link['month']) == self.end_date.month) and (int(link['year']) == self.end_date.year), data)))
 
             # Put the tasks into the queue
             for dict in data[start_index:end_index]:
                 print(f"Queueing tweet download for {dict['month']}-{dict['year']}")
                 queue.put(dict['link'])
             queue.join()
+
 
 if __name__ == "__main__":
     current_time = time.time()
