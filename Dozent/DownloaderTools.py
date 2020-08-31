@@ -22,8 +22,7 @@ class DownloaderTools:
         :param link: link that needs to be downloaded
         :return: None
         """
-        os.system(
-            f"axel --verbose --alternate --num-connections={DownloaderTools._connections_count} {link}")
+        os.system(f"axel --verbose --alternate --num-connections={DownloaderTools._connections_count} {link}")
 
     @classmethod
     def download_aria2(cls, link: str):
