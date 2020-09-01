@@ -1,8 +1,8 @@
 import multiprocessing
 import os
-
+import time
 from pySmartDL import SmartDL
-
+import math
 
 class DownloaderTools:
     @classmethod
@@ -12,8 +12,11 @@ class DownloaderTools:
         :param link: link that needs to be downloaded
         :return: None
         """
-        obj = SmartDL(link, '~/Downloads/')
-        obj.start()
+        obj = SmartDL(link, '~/Downloads/', progress_bar=False)
+        obj.start(blocking=False)
+        while not obj.isFinished():
+            print(f"{link} [{obj.get_status()}] {math.floor(obj.get_dl_size() / math.pow(2, 20))} Mb / {math.floor(obj.get_final_filesize() / math.pow(2,20))} Mb @ {obj.get_speed(human=True)} {obj.get_progress_bar()} [{math.floor(100 * obj.get_progress())}%, {obj.get_eta(human=True)} left]")
+            time.sleep(1)
 
     @classmethod
     def download_axel(cls, link: str):

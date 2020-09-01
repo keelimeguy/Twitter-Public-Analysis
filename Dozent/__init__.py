@@ -19,7 +19,7 @@ class _DownloadWorker(Thread):
             # Get the work from the queue and expand the tuple
             link = self.queue.get()
             try:
-                DownloaderTools.download_axel(link)
+                DownloaderTools.download_pysmartdl(link)
             finally:
                 self.queue.task_done()
 
@@ -47,8 +47,7 @@ class Dozent:
 
             data = json.loads(file.read())
 
-            start_index = data.index(
-                next(filter(lambda link: (int(link['month']) == self.start_date.month) and (int(link['year']) == self.start_date.year), data)))
+            start_index = data.index(next(filter(lambda link: (int(link['month']) == self.start_date.month) and (int(link['year']) == self.start_date.year), data)))
             end_index = data.index(next(filter(lambda link: (int(link['month']) == self.end_date.month) and (int(link['year']) == self.end_date.year), data)))
 
             # Put the tasks into the queue
@@ -60,6 +59,6 @@ class Dozent:
 
 if __name__ == "__main__":
     current_time = time.time()
-    d = Dozent(datetime.datetime(2012, 1, 1), datetime.datetime(2012, 5, 1))
+    d = Dozent(datetime.datetime(2011, 9, 1), datetime.datetime(2012, 1, 1))
     d.download_timeframe()
-    print(f"Download Time: {time.time() - current_time} seconds.")
+    print(f"Download Time: {datetime.timedelta(seconds=(time.time() - current_time))}")
