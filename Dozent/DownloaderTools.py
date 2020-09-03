@@ -1,8 +1,10 @@
+import math
 import multiprocessing
 import os
 import time
+
 from pySmartDL import SmartDL
-import math
+
 
 class DownloaderTools:
     @classmethod
@@ -15,7 +17,11 @@ class DownloaderTools:
         obj = SmartDL(link, '~/Downloads/', progress_bar=False)
         obj.start(blocking=False)
         while not obj.isFinished():
-            print(f"{link} [{obj.get_status()}] {math.floor(obj.get_dl_size() / math.pow(2, 20))} Mb / {math.floor(obj.get_final_filesize() / math.pow(2,20))} Mb @ {obj.get_speed(human=True)} {obj.get_progress_bar()} [{math.floor(100 * obj.get_progress())}%, {obj.get_eta(human=True)} left]")
+            print(f"{link}"
+                  f"[{obj.get_status()}] {math.floor(obj.get_dl_size() >> 20)} Mb / "
+                  f"{math.floor(obj.get_final_filesize() >> 20)} Mb "
+                  f"@ {obj.get_speed(human=True)} "                  
+                  f"{obj.get_progress_bar()} [{math.floor(100 * obj.get_progress())}%, {obj.get_eta(human=True)} left]")
             time.sleep(1)
 
     @classmethod

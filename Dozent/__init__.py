@@ -1,9 +1,9 @@
 import datetime
 import json
 import multiprocessing
+import time
 from queue import Queue
 from threading import Thread
-import time
 
 from Dozent.DownloaderTools import DownloaderTools
 
@@ -59,6 +59,6 @@ class Dozent:
 
 if __name__ == "__main__":
     current_time = time.time()
-    d = Dozent(datetime.datetime(2011, 9, 1), datetime.datetime(2012, 1, 1))
+    d = Dozent(datetime.datetime(2011, 9, 1), datetime.datetime(2016, 10, 1))
     d.download_timeframe()
     print(f"Download Time: {datetime.timedelta(seconds=(time.time() - current_time))}")
