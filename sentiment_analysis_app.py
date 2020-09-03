@@ -2,8 +2,7 @@ import argparse
 from typing import Dict
 import pandas as pd
 from tqdm import tqdm
-from sentiment_analysis_tools import Sentiments
-from hashtag_scraper import tweepy_streamer
+from Morpheus.classification.sentiment_analysis import Sentiments
 
 TOPICS_COUNT = 5
 TWEETS_COUNT = 20

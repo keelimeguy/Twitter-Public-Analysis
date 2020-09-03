@@ -12,7 +12,7 @@ flair_sentiment = flair.models.TextClassifier.load('en-sentiment')
 """
 Author: v2thegreat
 
-Source: https://medium.com/@b.terryjack/nlp-pre-trained-sentiment-analysis-1eb52a9d742c
+Tutorial Followed: https://medium.com/@b.terryjack/nlp-pre-trained-sentiment-analysis-1eb52a9d742c
 
 Libraries Used:
  - NLTK
