@@ -4,19 +4,43 @@ import time
 from pySmartDL import SmartDL
 import math
 
+
 class DownloaderTools:
     @classmethod
-    def download_pysmartdl(cls, link: str):
+    def download_pysmartdl(cls, link: str, verbose=True):
         """
         Downloads file from link using PySmartDL
         :param link: link that needs to be downloaded
+        :param verbose: Show verbose output
         :return: None
         """
-        obj = SmartDL(link, '~/Downloads/', progress_bar=False)
-        obj.start(blocking=False)
-        while not obj.isFinished():
-            print(f"{link} [{obj.get_status()}] {math.floor(obj.get_dl_size() / math.pow(2, 20))} Mb / {math.floor(obj.get_final_filesize() / math.pow(2,20))} Mb @ {obj.get_speed(human=True)} {obj.get_progress_bar()} [{math.floor(100 * obj.get_progress())}%, {obj.get_eta(human=True)} left]")
+        downloader_obj = SmartDL(link, '~/Downloads/', progress_bar=False)
+        downloader_obj.start(blocking=False)
+        while not downloader_obj.isFinished():
+            if verbose:
+                print(DownloaderTools._make_progress_status(downloader_obj, link))
             time.sleep(1)
+
+    @staticmethod
+    def _make_progress_status(downloader_obj: SmartDL, link, progress_bar_length=20) -> str:
+        """
+        Function to make progress bar
+        :param downloader_obj: SmartDL object that's currently downloading a file
+        :param link: Link that the SmartDL object is downloading from
+        :param progress_bar_length: Length of the progress bar
+        :return: returns the progress bar as a string format
+        """
+
+        status = downloader_obj.get_status()
+        num1 = math.floor(downloader_obj.get_dl_size() / math.pow(2, 20))
+        num2 = math.floor(downloader_obj.get_final_filesize() / math.pow(2, 20))
+        speed = downloader_obj.get_speed(human=True)
+        progress_bar = downloader_obj.get_progress_bar(length=progress_bar_length)
+        progress_percentage = math.floor(100 * downloader_obj.get_progress())
+        eta = downloader_obj.get_eta(human=True)
+
+        return f"{link} [{status}] {num1} Mb / {num2} Mb @ {speed} {progress_bar} " \
+               f"[{progress_percentage}%, {eta} left]"
 
     @classmethod
     def download_axel(cls, link: str):
@@ -25,7 +49,8 @@ class DownloaderTools:
         :param link: link that needs to be downloaded
         :return: None
         """
-        os.system(f"axel --verbose --alternate --num-connections={DownloaderTools._connections_count} {link}")
+        os.system(
+            f"axel --verbose --alternate --num-connections={DownloaderTools._connections_count} {link}")
 
     @classmethod
     def download_aria2(cls, link: str):
