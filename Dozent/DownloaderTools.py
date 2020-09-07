@@ -2,6 +2,7 @@ import math
 import multiprocessing
 import os
 import time
+import sys
 
 from pySmartDL import SmartDL
 
@@ -20,8 +21,8 @@ class DownloaderTools:
         downloader_obj.start(blocking=False)
         while not downloader_obj.isFinished():
             if verbose:
-                print(DownloaderTools._make_progress_status(downloader_obj, link))
-            time.sleep(1)
+                print(DownloaderTools._make_progress_status(downloader_obj, link), end="")
+            time.sleep(.25)
 
     @staticmethod
     def _make_progress_status(downloader_obj: SmartDL, link, progress_bar_length=20) -> str:
@@ -41,7 +42,7 @@ class DownloaderTools:
         progress_percentage = math.floor(100 * downloader_obj.get_progress())
         eta = downloader_obj.get_eta(human=True)
 
-        return f"{link} [{status}] {num1} Mb / {num2} Mb @ {speed} {progress_bar} " \
+        return f"\r {link} [{status}] {num1} Mb / {num2} Mb @ {speed} {progress_bar} " \
                f"[{progress_percentage}%, {eta} left]"
 
     @classmethod
