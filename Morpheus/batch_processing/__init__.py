@@ -16,7 +16,7 @@ from tqdm import tqdm
 def process_in_batches(file_paths: Iterable[str], read_func: Callable[[str], Any], func_to_apply: Callable[[Any], Any],
                        verbose: bool = True) -> Dict[str, Any]:
     """
-    Function to process data in batches to circumvent Dask Scheduler's limitations for 100k tasks
+    Function to process data in batches to circumvent Dask Scheduler's limitations (max of 100k tasks for example)
     :param file_paths: path of files that need to be individually processed
     :param read_func: function to read the file. This must return an object (for example: Dask Bag, Dask Array, str)
     :param func_to_apply: function to apply on the object that's returned on the read_func

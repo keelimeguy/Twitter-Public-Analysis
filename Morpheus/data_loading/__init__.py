@@ -31,7 +31,7 @@ def get_files_list(pathname: str, recursive: bool = False, suffix: str = '*.json
     return files_list
 
 
-def _read_compressed_bz2_json_file(file_path: str) -> List[dict]:
+def read_compressed_bz2_json_file(file_path: str) -> List[dict]:
     """
     Read a compressed bz2 json file. Best used when you have a list of json files
     :param file_path: path of the file that needs to be read
@@ -44,7 +44,7 @@ def _read_compressed_bz2_json_file(file_path: str) -> List[dict]:
     return [json.loads(tweet) for tweet in data]
 
 
-def _read_compressed_bz2_json_text(file_contents: str):
+def read_compressed_bz2_json_text(file_contents: str):
     """
     create json data from compressed bz2 text.
     Note: dask.bags.read_text might already uncompress this data, hence compression has been skipped here
@@ -61,7 +61,7 @@ def get_twitter_data_as_bags(file_find_expression='../../data/*.json.bz2') -> da
     :param file_find_expression: unix like expression for finding the relevant files
     :return: dask bag that contains information on the tweets
     """
-    bags = db.read_text(file_find_expression).map(_read_compressed_bz2_json_text)
+    bags = db.read_text(file_find_expression).map(read_compressed_bz2_json_text)
     return bags
 
 
