@@ -1,7 +1,7 @@
 """
 author: v2thegreat (v2thegreat@gmail.com)
 
-Functions to filter out irrelevant tweets that might not be wanted for processing
+Package to filter out irrelevant rows that might not be wanted for processing
 
 TODO:
     - This package is written with the hopes to better understand what problems processing such a dataset would be

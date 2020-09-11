@@ -3,6 +3,32 @@ import dask.bag as db
 import json
 import bz2
 from typing import List
+from glob import glob
+from os import path
+
+
+def get_files_list(pathname: str, recursive: bool = False, suffix: str = '.json*') -> List[str]:
+    """
+    function to get files from the given pathname.
+    Searches in the directory when pathname leads to a directory with the option for adding a custom suffix
+
+    If pathname given is a directory, searches in the directory
+    :param pathname: pathname from
+    :param recursive: Flag for searching recursively
+    :param suffix: suffix to search for files when a pathname leads to a directory is given
+    :raises ValueError: When no files are found based on the pathname
+    :return:
+    """
+
+    if path.isdir(pathname):
+        pathname = path.join(pathname, f'/{suffix}')
+
+    files_list = glob(pathname, recursive=recursive)
+
+    if not files_list:
+        raise ValueError('File path given does not return any files')
+
+    return files_list
 
 
 def _read_compressed_bz2_json_file(file_path: str) -> List[dict]:
