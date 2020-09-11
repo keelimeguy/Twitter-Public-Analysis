@@ -7,7 +7,7 @@ from glob import glob
 from os import path
 
 
-def get_files_list(pathname: str, recursive: bool = False, suffix: str = '.json*') -> List[str]:
+def get_files_list(pathname: str, recursive: bool = False, suffix: str = '*.json*') -> List[str]:
     """
     function to get files from the given pathname.
     Searches in the directory when pathname leads to a directory with the option for adding a custom suffix
@@ -21,7 +21,7 @@ def get_files_list(pathname: str, recursive: bool = False, suffix: str = '.json*
     """
 
     if path.isdir(pathname):
-        pathname = path.join(pathname, f'/{suffix}')
+        pathname = path.join(pathname, f'{suffix}')
 
     files_list = glob(pathname, recursive=recursive)
 
