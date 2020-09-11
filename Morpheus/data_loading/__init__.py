@@ -4,6 +4,7 @@ import json
 import bz2
 from typing import List
 
+
 def _read_compressed_bz2_json_file(file_path: str) -> List[dict]:
     """
     Read a compressed bz2 json file. Best used when you have a list of json files
