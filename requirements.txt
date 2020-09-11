@@ -6,3 +6,4 @@ tqdm
 tweepy
 pandas
 pyyaml
+dask
