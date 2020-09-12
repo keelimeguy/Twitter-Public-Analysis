@@ -22,7 +22,7 @@ Follow the steps [here](https://github.com/Twitter-Public-Analysis/Twitter-Publi
 
 4. We need to actually getting it running
 
-`python sentiment_analysis_app.py --topic-counts 3 --tweets-count 100 --clean-tweets True`
+`python sentiment_analysis_app.py --topic-counts 3 --tweets-count 100 --clean-tweets`
 
 4.5 Here's the `help` from the sentiment analysis app:
 ```

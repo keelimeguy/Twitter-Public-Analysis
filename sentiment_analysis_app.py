@@ -56,12 +56,12 @@ def run_sentiment_analysis(topics_count: int = TOPICS_COUNT,
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--topic-counts', default=TOPICS_COUNT, dest='topics_count', type=int,
-                        help='number of topics to download for')
-    parser.add_argument('--tweets-count', default=TWEETS_COUNT, dest='tweets_count', type=int,
-                        help='number of tweets to grab per topic')
-    parser.add_argument('--clean-tweets', default=TWEETS_COUNT, dest='clean_tweets', type=bool,
-                        help='clean the tweets before analyzing them')
-    args = parser.parse_args()
-    print(run_sentiment_analysis(args.topics_count, args.tweets_count, args.clean_tweets))
+    _parser = argparse.ArgumentParser()
+    _parser.add_argument('--topic-counts', default=TOPICS_COUNT, dest='topics_count', type=int,
+                         help='number of topics to download for')
+    _parser.add_argument('--tweets-count', default=TWEETS_COUNT, dest='tweets_count', type=int,
+                         help='number of tweets to grab per topic')
+    _parser.add_argument('--clean-tweets', default=TWEETS_COUNT, dest='clean_tweets', action='store_true',
+                         help='clean the tweets before analyzing them')
+    _args = _parser.parse_args()
+    print(run_sentiment_analysis(_args.topics_count, _args.tweets_count, _args.clean_tweets))
