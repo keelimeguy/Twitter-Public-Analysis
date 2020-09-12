@@ -5,7 +5,7 @@ import time
 from queue import Queue
 from threading import Thread
 
-from .DownloaderTools import DownloaderTools
+from DownloaderTools import DownloaderTools
 
 
 class _DownloadWorker(Thread):
@@ -63,7 +63,7 @@ class Dozent:
 
 
 if __name__ == "__main__":
-    _current_time = time.time()
+    _start_time = time.time()
     _d = Dozent(datetime.datetime(2011, 9, 1), datetime.datetime(2016, 10, 1))
     _d.download_timeframe()
-    print(f"Download Time: {datetime.timedelta(seconds=(time.time() - _current_time))}")
+    print(f"Download Time: {datetime.timedelta(seconds=(time.time() - _start_time))}")
