@@ -50,6 +50,9 @@ class Sentiments:
         :param text: text to be analyzed
         :return: sentiment compound for given text
         """
+        if not text:
+            return 0
+
         return Sentiments.get_instance().NLTK_SENTIMENT_INTENSITY_ANALYZER.polarity_scores(text=text)['compound']
 
     @staticmethod
@@ -61,6 +64,9 @@ class Sentiments:
         :param text: text to be analyzed
         :return: sentiment for given text
         """
+        if not text:
+            return 0
+
         return TextBlob(text=text).sentiment.polarity
 
     @staticmethod

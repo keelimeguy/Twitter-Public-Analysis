@@ -39,6 +39,10 @@ optional arguments:
   --clean-tweets        clean the tweets before analyzing them
 ```
 
+## Running tests
+
+`python -m unittest`
+
 ## Common issues
 
 ### Installation for Windows
