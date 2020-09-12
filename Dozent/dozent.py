@@ -55,15 +55,15 @@ class Dozent:
                                      (int(link['year']) == self.end_date.year), data)))
 
         # Put the tasks into the queue
-        for sample in data[start_index:end_index]:
-            print(f"Queueing tweet download for {sample['month']}-{sample['year']}")
-            queue.put(sample['link'])
+        for sample_date in data[start_index:end_index]:
+            print(f"Queueing tweet download for {sample_date['month']}-{sample_date['year']}")
+            queue.put(sample_date['link'])
 
         queue.join()
 
 
 if __name__ == "__main__":
     _start_time = time.time()
-    _d = Dozent(datetime.datetime(2011, 9, 1), datetime.datetime(2016, 10, 1))
-    _d.download_timeframe()
+    _dozent_object = Dozent(datetime.datetime(2011, 9, 1), datetime.datetime(2016, 10, 1))
+    _dozent_object.download_timeframe()
     print(f"Download Time: {datetime.timedelta(seconds=(time.time() - _start_time))}")

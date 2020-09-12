@@ -10,7 +10,6 @@ TWEETS_COUNT = 20
 
 
 def _get_average_tweets_per_topic(tweets_dict: Dict, topics_count: int) -> float:
-    # Note: dictionary keys have arbitrary ordering, not guaranteed in the same order each time
     topics_list = list(tweets_dict.keys())[:topics_count]
 
     total_tweets_count = 0
