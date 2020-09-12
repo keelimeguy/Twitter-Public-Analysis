@@ -38,3 +38,19 @@ optional arguments:
                         number of tweets to grab per topic
   --clean-tweets        clean the tweets before analyzing them
 ```
+
+## Common issues
+
+### Installation for Windows
+
+The torch dependency will likely need manually installed.
+
+1. Download PyTorch for your version from https://www.lfd.uci.edu/~gohlke/pythonlibs/#pytorch
+
+2. Install the downloaded wheel
+
+`pip install torch‑1.6.0‑cp36‑cp36m‑win_amd64.whl`
+
+3. You can now complete installation of the requirements
+
+`pip install -r requirements.txt`
