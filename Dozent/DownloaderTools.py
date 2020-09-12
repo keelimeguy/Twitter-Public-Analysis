@@ -7,7 +7,6 @@ import sys
 from pySmartDL import SmartDL
 
 
-
 class DownloaderTools:
     @classmethod
     def download_pysmartdl(cls, link: str, verbose=True):
@@ -43,7 +42,7 @@ class DownloaderTools:
         eta = downloader_obj.get_eta(human=True)
 
         return f"\r {link} [{status}] {num1} Mb / {num2} Mb @ {speed} {progress_bar} " \
-               f"[{progress_percentage}%, {eta} left]"
+            f"[{progress_percentage}%, {eta} left]"
 
     @classmethod
     def download_axel(cls, link: str):

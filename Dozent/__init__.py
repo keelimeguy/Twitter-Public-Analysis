@@ -42,13 +42,18 @@ class Dozent:
 
             for x in range(multiprocessing.cpu_count()):
                 worker = _DownloadWorker(queue)
-                worker.daemon = True  # Setting daemon to True will let the main thread exit even though the workers are blocking
+                # Setting daemon to True will let the main thread exit even though the workers are blocking
+                worker.daemon = True
                 worker.start()
 
             data = json.loads(file.read())
 
-            start_index = data.index(next(filter(lambda link: (int(link['month']) == self.start_date.month) and (int(link['year']) == self.start_date.year), data)))
-            end_index = data.index(next(filter(lambda link: (int(link['month']) == self.end_date.month) and (int(link['year']) == self.end_date.year), data)))
+            start_index = data.index(
+                next(filter(lambda link: (int(link['month']) == self.start_date.month) and
+                                         (int(link['year']) == self.start_date.year), data)))
+            end_index = data.index(
+                next(filter(lambda link: (int(link['month']) == self.end_date.month) and
+                                         (int(link['year']) == self.end_date.year), data)))
 
             # Put the tasks into the queue
             for dict in data[start_index:end_index]:
