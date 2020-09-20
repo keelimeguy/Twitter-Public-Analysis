@@ -8,3 +8,4 @@ pandas
 pyyaml
 pySmartDL
 aria2p
+numpy
