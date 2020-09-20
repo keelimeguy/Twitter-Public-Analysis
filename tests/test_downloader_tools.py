@@ -5,6 +5,7 @@ from Dozent.downloader_tools import DownloaderTools
 from pySmartDL import SmartDL
 from pySmartDL.control_thread import ControlThread
 from collections import namedtuple
+import threading
 
 DownloadProgress = namedtuple('DownloadProgress', 'dl_size filesize speed')
 
@@ -16,6 +17,8 @@ class DownloaderToolsTestCase(unittest.TestCase):
 
         # We want to initialize the SmartDL object without actually starting the download
         downloader_obj = SmartDL(url)
+        downloader_obj.post_threadpool_thread = threading.Thread(target=lambda: None)
+
         control_thread = ControlThread(downloader_obj)
         downloader_obj.control_thread = control_thread
 
@@ -31,13 +34,18 @@ class DownloaderToolsTestCase(unittest.TestCase):
             downloader_obj.shared_var.value = progress.dl_size << 20
             downloader_obj.filesize = progress.filesize << 20
             control_thread.dl_speed = progress.speed
-            progress_percentage = int(100 * progress.dl_size / progress.filesize) if progress.filesize else 0
+            progress_percentage = 100.0 * progress.dl_size / progress.filesize if progress.filesize else 0
 
-            expected_output = f"\r {url} [ready] {progress.dl_size} Mb / {progress.filesize} Mb " \
-                f"@ {progress.speed} {'B' if progress.speed else 'bytes'}/s " \
-                f"[{'#' if progress_percentage == 100 else '-'}] [{progress_percentage}%, 0 seconds left]"
+            expected_prefix = f"[finished] {progress.dl_size}Mb/{progress.filesize}Mb " \
+                f"@{progress.speed} {'B' if progress.speed else 'bytes'}/s"
 
-            self.assertEqual(expected_output, DownloaderTools._make_progress_status(downloader_obj, 3))
+            expected_suffix = f"[{int(progress_percentage):3.0f}%, {0:3.0f}sec left]"
+
+            actual_progress_percentage, actual_prefix, actual_suffix = DownloaderTools._make_progress_status(downloader_obj)
+
+            self.assertAlmostEqual(progress_percentage, actual_progress_percentage)
+            self.assertEqual(expected_prefix, actual_prefix)
+            self.assertEqual(expected_suffix, actual_suffix)
 
 
 if __name__ == "__main__":
