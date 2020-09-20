@@ -32,14 +32,14 @@ class DownloaderTools:
         """
         Downloads file from link using PySmartDL
         :param link: link that needs to be downloaded
-        :param verbose: Show verbose output
-        :return: None
+        :param verbose: Show verbose output, defaults to True
         """
+
         downloader_obj = SmartDL(link, '~/Downloads/', progress_bar=False)
         downloader_obj.start(blocking=False)
         while not downloader_obj.isFinished():
             if verbose:
-                print(cls._make_progress_status(downloader_obj), end="")
+                print(cls._make_progress_status(downloader_obj), end="", flush=True)
             time.sleep(.25)
 
     @classmethod
@@ -47,7 +47,6 @@ class DownloaderTools:
         """
         Downloads file from link using axel
         :param link: link that needs to be downloaded
-        :return: None
         """
         os.system(
             f"axel --verbose --alternate --num-connections={cls._connections_count} {link}")
@@ -57,7 +56,6 @@ class DownloaderTools:
         """
         Downloads file from link using aria2
         :param link: link that needs to be downloaded
-        :return: None
         """
         os.system(f"aria2c -x {cls._connections_count} {link}")
 

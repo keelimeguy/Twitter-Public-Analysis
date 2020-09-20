@@ -6,9 +6,9 @@ from queue import Queue
 from threading import Thread
 
 try:
-    from DownloaderTools import DownloaderTools
+    from downloader_tools import DownloaderTools
 except ModuleNotFoundError:
-    from .DownloaderTools import DownloaderTools
+    from .downloader_tools import DownloaderTools
 
 
 class _DownloadWorker(Thread):
@@ -22,17 +22,15 @@ class _DownloadWorker(Thread):
             # Get the work from the queue and expand the tuple
             link = self.queue.get()
             try:
-                DownloaderTools.download_pysmartdl(link)
+                DownloaderTools.download_pysmartdl(link, verbose=True)
             finally:
                 self.queue.task_done()
 
 
 class Dozent:
-    def __init__(self, start_date: datetime.datetime, end_date: datetime.datetime):
-        self.start_date = start_date
-        self.end_date = end_date
 
-    def download_timeframe(self):
+    @staticmethod
+    def download_timeframe(start_date: datetime.datetime, end_date: datetime.datetime):
         '''
         Download all tweet archives from self.start_date to self.end_date
         :return: None
@@ -51,15 +49,15 @@ class Dozent:
             worker.start()
 
         start_index = data.index(
-            next(filter(lambda link: (int(link['month']) == self.start_date.month) and
-                                     (int(link['year']) == self.start_date.year), data)))
+            next(filter(lambda link: (int(link['month']) == start_date.month) and
+                                     (int(link['year']) == start_date.year), data)))
         end_index = data.index(
-            next(filter(lambda link: (int(link['month']) == self.end_date.month) and
-                                     (int(link['year']) == self.end_date.year), data)))
+            next(filter(lambda link: (int(link['month']) == end_date.month) and
+                                     (int(link['year']) == end_date.year), data)))
 
         # Put the tasks into the queue
         for sample_date in data[start_index:end_index]:
-            print(f"Queueing tweet download for {sample_date['month']}-{sample_date['year']}")
+            # print(f"Queueing tweet download for {sample_date['month']}-{sample_date['year']}")
             queue.put(sample_date['link'])
 
         queue.join()
@@ -67,6 +65,5 @@ class Dozent:
 
 if __name__ == "__main__":
     _start_time = time.time()
-    _dozent_object = Dozent(datetime.datetime(2011, 9, 1), datetime.datetime(2016, 10, 1))
-    _dozent_object.download_timeframe()
+    Dozent.download_timeframe(datetime.datetime(2011, 9, 1), datetime.datetime(2016, 10, 1))
     print(f"Download Time: {datetime.timedelta(seconds=(time.time() - _start_time))}")
