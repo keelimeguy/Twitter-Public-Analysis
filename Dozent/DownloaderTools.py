@@ -35,7 +35,7 @@ class DownloaderTools:
         :param verbose: Show verbose output
         :return: None
         """
-        downloader_obj = SmartDL(link, '~/Downloads/', progress_bar=False)
+        downloader_obj = SmartDL(link, 'data/', progress_bar=False)
         downloader_obj.start(blocking=False)
         while not downloader_obj.isFinished():
             if verbose:
