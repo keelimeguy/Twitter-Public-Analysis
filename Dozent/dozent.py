@@ -65,5 +65,7 @@ class Dozent:
 if __name__ == "__main__":
     _start_time = time.time()
     _dozent_object = Dozent(datetime.datetime(2011, 9, 1), datetime.datetime(2016, 10, 1))
+    if _dozent_object.end_date > datetime.datetime(2017, 6, 1):
+        RuntimeError('Not implemented')
     _dozent_object.download_timeframe()
     print(f"Download Time: {datetime.timedelta(seconds=(time.time() - _start_time))}")
