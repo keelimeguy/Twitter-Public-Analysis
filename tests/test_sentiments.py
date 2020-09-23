@@ -1,6 +1,6 @@
 import unittest
 
-from sentiment_analysis_tools import Sentiments
+from Morpheus.classification.sentiments import Sentiments
 import math
 
 
