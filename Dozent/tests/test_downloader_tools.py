@@ -1,6 +1,6 @@
 import unittest
 
-from Dozent.DownloaderTools import DownloaderTools
+from ..DownloaderTools import DownloaderTools
 
 from pySmartDL import SmartDL
 from pySmartDL.control_thread import ControlThread
