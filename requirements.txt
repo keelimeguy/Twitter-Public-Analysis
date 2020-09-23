@@ -6,3 +6,5 @@ tqdm
 tweepy
 pandas
 pyyaml
+pySmartDL
+aria2p

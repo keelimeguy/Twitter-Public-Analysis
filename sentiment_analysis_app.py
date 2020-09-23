@@ -17,25 +17,28 @@ TWEETS_COUNT = 20
 
 
 def _get_average_tweets_per_topic(tweets_dict: Dict, topics_count: int) -> float:
-    tweets_count_per_topic = [len(tweets_dict[list(tweets_dict.keys())[x]]) for x in
-                              range(topics_count)]
-    total_tweets_count = sum(tweets_count_per_topic)
+    topics_list = list(tweets_dict.keys())[:topics_count]
+
+    total_tweets_count = 0
+    for topic in topics_list:
+        total_tweets_count += len(tweets_dict[topic])
+
     return total_tweets_count / topics_count
 
 
-def _format_tweets(tweets_dict):
+def _format_tweets(tweets_dict: Dict) -> Dict:
     all_topics = []
     all_tweets = []
 
-    for topic in tweets_dict.keys():
-        all_topics.extend([topic] * len(tweets_dict[topic]))
-        all_tweets.extend(tweets_dict[topic])
+    for topic, tweets in tweets_dict.items():
+        all_topics.extend([topic] * len(tweets))
+        all_tweets.extend(tweets)
 
     topics_tweets_dict = {'topic_name': all_topics, 'tweets': all_tweets}
     return topics_tweets_dict
 
 
-def _get_sentiments(topics_tweets_dict):
+def _get_sentiments(topics_tweets_dict: Dict) -> pd.DataFrame:
     sentiments_progress_bar = tqdm(topics_tweets_dict['tweets'], desc='Running Sentiment Analysis')
     sentiments = [Sentiments.multiple_sentiment_analysis(tweet) for tweet in sentiments_progress_bar]
     sentiments = pd.DataFrame(sentiments)
@@ -48,7 +51,7 @@ def _get_sentiments(topics_tweets_dict):
 
 def run_sentiment_analysis(topics_count: int = TOPICS_COUNT,
                            number_of_tweets_per_topic: int = TWEETS_COUNT,
-                           clean_tweets=True) -> str:
+                           clean_tweets: bool = True) -> str:
     print('\nFetching tweets, this might take a moment')
     tweets_dict = tweepy_streamer.fetch_tweets(topics_count, number_of_tweets_per_topic, clean_tweets=clean_tweets)
 
@@ -63,12 +66,12 @@ def run_sentiment_analysis(topics_count: int = TOPICS_COUNT,
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--topic-counts', default=TOPICS_COUNT, dest='topics_count', type=int,
-                        help='number of topics to download for')
-    parser.add_argument('--tweets-count', default=TWEETS_COUNT, dest='tweets_count', type=int,
-                        help='number of tweets to grab per topic')
-    parser.add_argument('--clean-tweets', default=TWEETS_COUNT, dest='clean_tweets', type=bool,
-                        help='clean the tweets before analyzing them')
-    args = parser.parse_args()
-    print(run_sentiment_analysis(args.topics_count, args.tweets_count, args.clean_tweets))
+    _parser = argparse.ArgumentParser()
+    _parser.add_argument('--topic-counts', default=TOPICS_COUNT, dest='topics_count', type=int,
+                         help='number of topics to download for')
+    _parser.add_argument('--tweets-count', default=TWEETS_COUNT, dest='tweets_count', type=int,
+                         help='number of tweets to grab per topic')
+    _parser.add_argument('--clean-tweets', default=TWEETS_COUNT, dest='clean_tweets', action='store_true',
+                         help='clean the tweets before analyzing them')
+    _args = _parser.parse_args()
+    print(run_sentiment_analysis(_args.topics_count, _args.tweets_count, _args.clean_tweets))
