@@ -1,3 +1,10 @@
+raise NotImplementedError("\n\nHey! We're refactoring some stuff to make it easier to develop.\n"
+                          "We have a ton of ideas in mind and we're building it all up bit by bit\n"
+                          "so give us a few weeks to add some cool changes, and we'll get back to you!\n"
+                          "Are you looking to contribute in the meantime or want to join our discussion?\n"
+                          "Follow our discord here!\n"
+                          "https://discord.com/channels/729368876965429310/729368876965429313")
+
 import argparse
 from typing import Dict
 import pandas as pd
