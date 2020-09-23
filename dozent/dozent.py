@@ -43,6 +43,9 @@ class Dozent:
         :param download_dir: A relative path to the download directory, defaults to './~/Downloads'
         '''
 
+        if end_date > datetime.datetime(2017, 6, 1):
+            ValueError(f'Specified end_date is out of range: {end_date} (>{datetime.datetime(2017, 6, 1)})')
+
         with open('twitter-archivestream-links.json') as file:
             data = json.loads(file.read())
 
