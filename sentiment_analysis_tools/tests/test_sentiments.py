@@ -1,6 +1,6 @@
 import unittest
 
-from ..sentiments import Sentiments
+from sentiment_analysis_tools import Sentiments
 import math
 
 
