@@ -1,7 +1,7 @@
 """
 author: v2thegreat (v2thegreat@gmail.com)
 
-Package to process tweets from the data_loading in batches to reduce the workload on the scheduler based on time series
+Package to process tweets from the data_loading_tbd in batches to reduce the workload on the scheduler based on time series
 
 TODO:
     - This package is written with the hopes to better understand what problems processing such a dataset would be
