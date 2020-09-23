@@ -11,8 +11,6 @@ import pandas as pd
 from tqdm import tqdm
 from Morpheus.classification.sentiment_analysis import Sentiments
 
-from Morpheus.filters import Filter
-
 TOPICS_COUNT = 5
 TWEETS_COUNT = 20
 
