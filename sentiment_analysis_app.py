@@ -48,20 +48,20 @@ def _get_sentiments(topics_tweets_dict: Dict) -> pd.DataFrame:
     return sentiments
 
 
-def run_sentiment_analysis(topics_count: int = TOPICS_COUNT,
-                           number_of_tweets_per_topic: int = TWEETS_COUNT,
-                           clean_tweets: bool = True) -> str:
-    print('\nFetching tweets, this might take a moment')
-    tweets_dict = tweepy_streamer.fetch_tweets(topics_count, number_of_tweets_per_topic, clean_tweets=clean_tweets)
-
-    print(f"\nGot {_get_average_tweets_per_topic(tweets_dict, topics_count)} tweets for each topic."
-          f" Originally tried to get {number_of_tweets_per_topic} per topic")
-
-    topics_tweets_dict = _format_tweets(tweets_dict)
-
-    sentiments = _get_sentiments(topics_tweets_dict)
-
-    return sentiments.groupby('topic_name').agg(['mean', 'min', 'max']).to_string()
+# def run_sentiment_analysis(topics_count: int = TOPICS_COUNT,
+#                            number_of_tweets_per_topic: int = TWEETS_COUNT,
+#                            clean_tweets: bool = True) -> str:
+#     print('\nFetching tweets, this might take a moment')
+#     tweets_dict = tweepy_streamer.fetch_tweets(topics_count, number_of_tweets_per_topic, clean_tweets=clean_tweets)
+#
+#     print(f"\nGot {_get_average_tweets_per_topic(tweets_dict, topics_count)} tweets for each topic."
+#           f" Originally tried to get {number_of_tweets_per_topic} per topic")
+#
+#     topics_tweets_dict = _format_tweets(tweets_dict)
+#
+#     sentiments = _get_sentiments(topics_tweets_dict)
+#
+#     return sentiments.groupby('topic_name').agg(['mean', 'min', 'max']).to_string()
 
 
 if __name__ == "__main__":
@@ -73,4 +73,4 @@ if __name__ == "__main__":
     _parser.add_argument('--clean-tweets', default=TWEETS_COUNT, dest='clean_tweets', action='store_true',
                          help='clean the tweets before analyzing them')
     _args = _parser.parse_args()
-    print(run_sentiment_analysis(_args.topics_count, _args.tweets_count, _args.clean_tweets))
+    # print(run_sentiment_analysis(_args.topics_count, _args.tweets_count, _args.clean_tweets))
