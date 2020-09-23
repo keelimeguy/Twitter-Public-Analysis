@@ -5,7 +5,10 @@ import time
 from queue import Queue
 from threading import Thread
 
-from DownloaderTools import DownloaderTools
+try:
+    from downloader_tools import DownloaderTools
+except ModuleNotFoundError:
+    from .downloader_tools import DownloaderTools
 
 
 class _DownloadWorker(Thread):

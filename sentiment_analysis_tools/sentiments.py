@@ -1,5 +1,6 @@
 from typing import Dict
 
+import math
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
@@ -50,6 +51,9 @@ class Sentiments:
         :param text: text to be analyzed
         :return: sentiment compound for given text
         """
+        if not text:
+            return math.nan
+
         return Sentiments.get_instance().NLTK_SENTIMENT_INTENSITY_ANALYZER.polarity_scores(text=text)['compound']
 
     @staticmethod
@@ -61,6 +65,9 @@ class Sentiments:
         :param text: text to be analyzed
         :return: sentiment for given text
         """
+        if not text:
+            return math.nan
+
         return TextBlob(text=text).sentiment.polarity
 
     @staticmethod
@@ -73,7 +80,7 @@ class Sentiments:
         :return: sentiment for given text
         """
         if not text:
-            return 0
+            return math.nan
 
         s = flair.data.Sentence(text)
         Sentiments.get_instance().flair_sentiment.predict(s)

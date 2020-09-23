@@ -2,7 +2,7 @@ import tarfile
 import time
 from datetime import timedelta
 import os
-from tqdm import tqdm
+
 
 class Preprocess:
     def __init__(self, file: str):
