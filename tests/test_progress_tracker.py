@@ -3,7 +3,7 @@ import unittest
 from typing import Tuple
 import time
 
-from Dozent.progress_tracker import ProgressTracker, Task
+from dozent.progress_tracker import ProgressTracker, Task
 
 
 class ProgressTrackerTestCase(unittest.TestCase):

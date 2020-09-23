@@ -7,7 +7,7 @@ from pySmartDL.control_thread import ControlThread
 from collections import namedtuple
 import threading
 
-DownloadProgress = namedtuple('DownloadProgress', 'dl_size filesize speed')
+DownloadProgress = namedtuple('DownloadProgress', 'dl_size filesize speed status')
 
 
 class DownloaderToolsTestCase(unittest.TestCase):
@@ -23,21 +23,24 @@ class DownloaderToolsTestCase(unittest.TestCase):
         downloader_obj.control_thread = control_thread
 
         for progress in [
-            DownloadProgress(dl_size=0, filesize=0, speed=0),
-            DownloadProgress(dl_size=1024, filesize=1048576, speed=42),
-            DownloadProgress(dl_size=129864, filesize=129865, speed=777),
-            DownloadProgress(dl_size=999999, filesize=999999, speed=999),
+            DownloadProgress(dl_size=0, filesize=0, speed=0, status='ready'),
+            DownloadProgress(dl_size=1024, filesize=1048576, speed=42, status='downloading'),
+            DownloadProgress(dl_size=129864, filesize=129865, speed=777, status='paused'),
+            DownloadProgress(dl_size=999999, filesize=999999, speed=999, status='finished'),
         ]:
             assert(progress.speed < 1000)
 
             # We create faked download progress to test the output
             downloader_obj.shared_var.value = progress.dl_size << 20
             downloader_obj.filesize = progress.filesize << 20
+            downloader_obj.status = progress.status
             control_thread.dl_speed = progress.speed
             progress_percentage = 100.0 * progress.dl_size / progress.filesize if progress.filesize else 0
 
-            expected_prefix = f"[finished] {progress.dl_size}Mb/{progress.filesize}Mb " \
-                f"@{progress.speed} {'B' if progress.speed else 'bytes'}/s"
+            expected_speed = progress.speed if progress.status != 'paused' else 0
+
+            expected_prefix = f"[{progress.status}] {progress.dl_size}Mb/{progress.filesize}Mb " \
+                f"@{expected_speed} {'B' if expected_speed else 'bytes'}/s"
 
             expected_suffix = f"[{int(progress_percentage):3.0f}%, {0:3.0f}sec left]"
 
