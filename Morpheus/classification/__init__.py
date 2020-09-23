@@ -1,3 +1,3 @@
-from .sentiment_analysis import Sentiments
+from .sentiments import Sentiments
 
 __all__ = ['Sentiments', ]
