@@ -15,6 +15,7 @@ class DataLoadingTestCase(unittest.TestCase):
             If order matters, glob might have to be reconfigured
         :return:
         """
+        print(DataLoading.get_files_list(self.data_path))
         self.assertTrue(
             set(DataLoading.get_files_list(self.data_path)) == {f'{self.path_prefix}\\test_sample_files.json.bz2',
                                                                 f'{self.path_prefix}\\test_sample_files_2.json.bz2'})
