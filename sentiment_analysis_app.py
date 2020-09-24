@@ -9,7 +9,7 @@ import argparse
 from typing import Dict
 import pandas as pd
 from tqdm import tqdm
-from Morpheus.classification.sentiments import Sentiments
+from morpheus.classification.sentiments import Sentiments
 
 TOPICS_COUNT = 5
 TWEETS_COUNT = 20

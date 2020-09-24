@@ -1,7 +1,7 @@
 import unittest
-from Morpheus.data_loading import DataLoading
+from morpheus.data_loading import DataLoading
 from tests import CommonTestSetup
-from Morpheus.filters import Filter
+from morpheus.filters import Filter
 
 
 class FilterTestCase(unittest.TestCase):

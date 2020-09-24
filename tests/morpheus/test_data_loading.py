@@ -1,6 +1,6 @@
 import unittest
 from dask.bag import Bag
-from Morpheus.data_loading import DataLoading
+from morpheus.data_loading import DataLoading
 from tests import CommonTestSetup
 
 
