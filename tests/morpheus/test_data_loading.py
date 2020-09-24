@@ -9,9 +9,15 @@ class DataLoadingTestCase(unittest.TestCase):
         self.data_path, self.path_prefix = CommonTestSetup.set_data_dir_path()
 
     def test_get_files_list_in_data(self):
+        """
+        Note:
+            function assumes that order doesn't matter
+            If order matters, glob might have to be reconfigured
+        :return:
+        """
         self.assertEqual(
-            DataLoading.get_files_list(self.data_path), [f'{self.path_prefix}\\test_sample_files.json.bz2',
-                                                         f'{self.path_prefix}\\test_sample_files_2.json.bz2'])
+            set(DataLoading.get_files_list(self.data_path)),
+            {f'{self.path_prefix}\\test_sample_files.json.bz2', f'{self.path_prefix}\\test_sample_files_2.json.bz2'})
 
     def test_get_files_list_when_no_files_present(self):
         try:
@@ -36,6 +42,10 @@ class DataLoadingTestCase(unittest.TestCase):
         self.assertEqual(type(data), Bag)
 
     def test_remove_deleted_tweets(self):
+        """
+        Note: Function assumes that there is a removed tweet in the first 20 tweets.
+        :return:
+        """
         bags = DataLoading.get_twitter_data_as_bags(self.data_path, remove_deleted_tweets=False)
         removed_tweets = DataLoading.remove_deleted_tweets(bags)
         bags = bags.take(20)
