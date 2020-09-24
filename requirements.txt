@@ -1,11 +1,10 @@
-flair
 textblob
 nltk
 matplotlib
 tqdm
-tweepy
 pandas
 pyyaml
 pySmartDL
 aria2p
 numpy
+dask[complete]
