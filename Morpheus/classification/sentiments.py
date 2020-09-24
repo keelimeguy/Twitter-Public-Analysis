@@ -4,23 +4,19 @@ import math
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
-import flair
 from pprint import pprint
 
 """
 Author: v2thegreat
-
 Source: https://medium.com/@b.terryjack/nlp-pre-trained-sentiment-analysis-1eb52a9d742c
-
 Libraries Used:
  - NLTK
  - TextBlob
- - Flair
+ - Flair (Depreciated due to dependency issues)
 """
 
 
 class Sentiments:
-
     __instance__ = None
 
     def __init__(self):
@@ -29,7 +25,9 @@ class Sentiments:
 
             nltk.download('vader_lexicon', quiet=True)
             self.NLTK_SENTIMENT_INTENSITY_ANALYZER = SentimentIntensityAnalyzer()
-            self.flair_sentiment = flair.models.TextClassifier.load('en-sentiment')
+
+            # Depreciated due to dependency issues
+            # self.flair_sentiment = flair.models.TextClassifier.load('en-sentiment')
 
         else:
             raise RuntimeError("singleton Sentiments class is created more than once!")
@@ -46,7 +44,6 @@ class Sentiments:
     def sentiment_analysis_nltk(text: str) -> float:
         """
         Run sentiment analysis using the library NLTK. Runs default sentiment on vader lexicon
-
         Works based on bag of words and positive and negative word lookups
         :param text: text to be analyzed
         :return: sentiment compound for given text
@@ -60,7 +57,6 @@ class Sentiments:
     def sentiment_analysis_textblob(text: str) -> float:
         """
         Run sentiment analysis using the library textblob. Returns default sentiment
-
         Works similar to NLTK's sentiment analysis, but includes subjectivity analysis
         :param text: text to be analyzed
         :return: sentiment for given text
@@ -74,26 +70,27 @@ class Sentiments:
     def sentiment_analysis_flair(text: str) -> float:
         """
         Run sentiment analysis using the library flair. Returns default sentiment
-
         Works based on a character-level LSTM neural network
         :param text: text to be analyzed
         :return: sentiment for given text
         """
-        if not text:
-            return math.nan
 
-        s = flair.data.Sentence(text)
-        Sentiments.get_instance().flair_sentiment.predict(s)
-        total_sentiment = s.labels
-        if total_sentiment[0].value == 'NEGATIVE':
-            return total_sentiment[0].score * -1
-        else:
-            return total_sentiment[0].score
+        raise DeprecationWarning("Depreciated due to dependency issues. Do not use")
+        #
+        # if not text:
+        #     return math.nan
+        #
+        # s = flair.data.Sentence(text)
+        # Sentiments.get_instance().flair_sentiment.predict(s)
+        # total_sentiment = s.labels
+        # if total_sentiment[0].value == 'NEGATIVE':
+        #     return total_sentiment[0].score * -1
+        # else:
+        #     return total_sentiment[0].score
 
     _sentiment_function_mapping = {
         'nltk': sentiment_analysis_nltk.__func__,
-        'textblob': sentiment_analysis_textblob.__func__,
-        'flair': sentiment_analysis_flair.__func__
+        'textblob': sentiment_analysis_textblob.__func__
     }
 
     @classmethod
