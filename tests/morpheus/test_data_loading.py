@@ -50,3 +50,7 @@ class DataLoadingTestCase(unittest.TestCase):
         bags = bags.take(20)
         computed = removed_tweets.take(20)
         self.assertNotEqual(bags, computed)
+
+
+if __name__ == "__main__":
+    unittest.main()

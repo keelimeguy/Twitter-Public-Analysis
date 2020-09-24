@@ -12,3 +12,7 @@ class FilterTestCase(unittest.TestCase):
         data = DataLoading.get_twitter_data_as_bags(self.data_path).to_dataframe()
         results = Filter.filter(rows=data, column_name='lang', like='en')
         self.assertTrue(results.compute().shape[0] != 0)
+
+
+if __name__ == "__main__":
+    unittest.main()
