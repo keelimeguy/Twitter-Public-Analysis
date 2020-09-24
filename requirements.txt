@@ -8,3 +8,4 @@ pySmartDL
 aria2p
 numpy
 dask[complete]
+pytest
