@@ -7,3 +7,4 @@ pyyaml
 pySmartDL
 aria2p
 dask[complete]
+pytest
