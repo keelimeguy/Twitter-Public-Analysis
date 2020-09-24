@@ -1,20 +1,12 @@
 import unittest
 from dask.bag import Bag
 from Morpheus.data_loading import DataLoading
-from glob import glob
+from tests import CommonTestSetup
 
 
 class DataLoadingTestCase(unittest.TestCase):
     def setUp(self) -> None:
-        try:
-            self.data_path = '../../data/*.json.bz2'
-            self.path_prefix = '../../data'
-            assert glob(self.data_path) == ['../../data\\test_sample_files.json.bz2',
-                                            '../../data\\test_sample_files_2.json.bz2']
-        except AssertionError:
-            self.data_path = 'data/*.json.bz2'
-            self.path_prefix = 'data'
-            print(glob(self.data_path))
+        self.data_path, self.path_prefix = CommonTestSetup.set_data_dir_path()
 
     def test_get_files_list_in_data(self):
         self.assertEqual(
