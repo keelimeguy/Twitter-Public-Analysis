@@ -13,6 +13,24 @@ class SentimentsTestCase(unittest.TestCase):
 
         self.assertEqual(expected_output, Sentiments.multiple_sentiment_analysis(''))
 
+    def test_multiple_sentiments_positive(self):
+        expected_greater_than = 0
+        expected_less_than = 1
+
+        results = Sentiments.multiple_sentiment_analysis('I love this!')
+
+        for method in results:
+            self.assertTrue(expected_greater_than <= results[method] <= expected_less_than)
+
+    def test_multiple_sentiments_negative(self):
+        expected_greater_than = -1
+        expected_less_than = 0
+
+        results = Sentiments.multiple_sentiment_analysis('I hate this!')
+
+        for method in results:
+            self.assertTrue(expected_greater_than <= results[method] <= expected_less_than)
+
 
 if __name__ == "__main__":
     unittest.main()
