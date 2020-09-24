@@ -3,7 +3,7 @@
 
 name: Build
 
-on: [push, pull_request, workflow_dispatch]
+on: [pull_request, workflow_dispatch]
 
 jobs:
   build:
@@ -30,3 +30,7 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Ensuring Examples Work
+      run: |
+        # Testing batch processing counting tweets
+        python examples/Morpheus/batch_processing/batch_processing_counting_tweets.py
