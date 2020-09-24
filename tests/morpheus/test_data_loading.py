@@ -2,6 +2,7 @@ import unittest
 from dask.bag import Bag
 from morpheus.data_loading import DataLoading
 from tests import CommonTestSetup
+from os import path
 
 
 class DataLoadingTestCase(unittest.TestCase):
@@ -16,9 +17,9 @@ class DataLoadingTestCase(unittest.TestCase):
         :return:
         """
         print(DataLoading.get_files_list(self.data_path))
-        self.assertTrue(
-            set(DataLoading.get_files_list(self.data_path)) == {f'{self.path_prefix}\\test_sample_files.json.bz2',
-                                                                f'{self.path_prefix}\\test_sample_files_2.json.bz2'})
+        self.assertTrue(set(DataLoading.get_files_list(self.data_path)) ==
+                        {path.join(self.path_prefix, 'test_sample_files.json.bz2'),
+                         path.join(self.path_prefix, 'test_sample_files_2.json.bz2')})
 
         def test_get_files_list_when_no_files_present(self):
             try:

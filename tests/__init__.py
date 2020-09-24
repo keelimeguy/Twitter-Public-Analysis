@@ -2,6 +2,7 @@ import io
 import sys
 from glob import glob
 from typing import Tuple
+from os import path
 
 
 class CommonTestSetup:
@@ -10,8 +11,8 @@ class CommonTestSetup:
         try:
             data_path = '../../data/*.json.bz2'
             path_prefix = '../../data'
-            assert glob(data_path) == ['../../data\\test_sample_files.json.bz2',
-                                       '../../data\\test_sample_files_2.json.bz2']
+            assert glob(data_path) == [path.join(path_prefix, 'test_sample_files.json.bz2'),
+                                       path.join(path_prefix, 'test_sample_files_2.json.bz2')]
             return data_path, path_prefix
 
         except AssertionError:
