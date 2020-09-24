@@ -34,3 +34,10 @@ class DataLoadingTestCase(unittest.TestCase):
     def test_get_twitter_data_as_bags(self):
         data = DataLoading.get_twitter_data_as_bags('../../data/test_sample_files.json.bz2')
         self.assertEqual(type(data), Bag)
+
+    def test_remove_deleted_tweets(self):
+        bags = DataLoading.get_twitter_data_as_bags(self.data_path, remove_deleted_tweets=False)
+        removed_tweets = DataLoading.remove_deleted_tweets(bags)
+        bags = bags.take(20)
+        computed = removed_tweets.take(20)
+        self.assertNotEqual(bags, computed)
