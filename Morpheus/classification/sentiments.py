@@ -3,11 +3,9 @@ from typing import Dict
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
-import flair
 
 nltk.download('vader_lexicon', quiet=True)
 NLTK_SENTIMENT_INTENSITY_ANALYZER = SentimentIntensityAnalyzer()
-flair_sentiment = flair.models.TextClassifier.load('en-sentiment')
 
 """
 Author: v2thegreat
@@ -17,7 +15,7 @@ Tutorial Followed: https://medium.com/@b.terryjack/nlp-pre-trained-sentiment-ana
 Libraries Used:
  - NLTK
  - TextBlob
- - Flair
+ - Flair (Depreciated due to dependency issues)
 """
 
 
@@ -53,16 +51,17 @@ class Sentiments:
         :param text: text to be analysed
         :return: sentiment for given text
         """
-        if not text:
-            return 0
-
-        s = flair.data.Sentence(text)
-        flair_sentiment.predict(s)
-        total_sentiment = s.labels
-        if total_sentiment[0].value == 'NEGATIVE':
-            return total_sentiment[0].score * -1
-        else:
-            return total_sentiment[0].score
+        raise DeprecationWarning("This function has been depreciated")
+        # if not text:
+        #     return 0
+        #
+        # s = flair.data.Sentence(text)
+        # flair_sentiment.predict(s)
+        # total_sentiment = s.labels
+        # if total_sentiment[0].value == 'NEGATIVE':
+        #     return total_sentiment[0].score * -1
+        # else:
+        #     return total_sentiment[0].score
 
     @staticmethod
     def multiple_sentiment_analysis(text: str) -> Dict[str, float]:
@@ -72,12 +71,11 @@ class Sentiments:
 
 _sentiment_functions = {
     'nltk': Sentiments.sentiment_analysis_nltk,
-    'textblob': Sentiments.sentiment_analysis_textblob,
-    'flair': Sentiments.sentiment_analysis_flair
+    'textblob': Sentiments.sentiment_analysis_textblob
 }
 
 if __name__ == "__main__":
     sentence = 'The world is not a good place'
     print(Sentiments.sentiment_analysis_nltk(sentence))
     print(Sentiments.sentiment_analysis_textblob(sentence))
-    print(Sentiments.sentiment_analysis_flair(sentence))
+    # print(Sentiments.sentiment_analysis_flair(sentence))
