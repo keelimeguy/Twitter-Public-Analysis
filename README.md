@@ -18,7 +18,7 @@ Getting started shouldn't be too hard. Here are the steps:
 
 3. And you're done with the initial setup!
 
-Great! Now you can work with Dozent (The powerful downloader that can download and preprocess the massive datasets!), and Morpheus (The robust set of tools that you'll use to process those massive datasets).
+Great! Now you can work with Dozent (The powerful downloader that can download and preprocess the massive datasets!), and Morpheus (The robust set of tools that you'll use to process those massive datasets). We'll link their repositories soon.
 
 ## Running tests (to make sure that our code works)
 
