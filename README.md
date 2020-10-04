@@ -1,8 +1,8 @@
 # Twitter-Public-Analysis
 
 ![Build](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/workflows/Build/badge.svg)
-[![codecov](https://codecov.io/gh/Twitter-Public-Analysis/Twitter-Public-Analysis/branch/master/graph/badge.svg?token=FPV2J90ECP)](undefined)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ac5a9260af51489812d/maintainability)](https://codeclimate.com/github/Twitter-Public-Analysis/Twitter-Public-Analysis/maintainability)
+[![codecov](https://codecov.io/gh/Twitter-Public-Analysis/Twitter-Public-Analysis/branch/master/graph/badge.svg?token=FPV2J90ECP)](undefined)
 [![Issues](https://img.shields.io/github/issues-raw/Twitter-Public-Analysis/Twitter-Public-Analysis.svg?maxAge=25000)](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/issues)
 ![Discord Shield](https://discordapp.com/api/guilds/729368876965429310/widget.png?style=shield)
 
