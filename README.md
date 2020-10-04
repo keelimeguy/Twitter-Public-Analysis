@@ -6,6 +6,7 @@
 ![Discord Shield](https://discordapp.com/api/guilds/729368876965429310/widget.png?style=shield)
 [![Issues](https://img.shields.io/github/issues-raw/Twitter-Public-Analysis/Twitter-Public-Analysis.svg?maxAge=25000)](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/issues)
 [![PRs Welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/pulls)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Twitter-Public-Analysis/Twitter-Public-Analysis.svg?style=flat)]()
 
 Hey! We're working on making a twitter analysis tool that can analyze tweets in real time and give us valuable insights
 
