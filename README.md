@@ -3,7 +3,6 @@
 ![Build](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/workflows/Build/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ac5a9260af51489812d/maintainability)](https://codeclimate.com/github/Twitter-Public-Analysis/Twitter-Public-Analysis/maintainability)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Twitter-Public-Analysis/Twitter-Public-Analysis.svg?style=flat)]()
-
 ![Discord Shield](https://discordapp.com/api/guilds/729368876965429310/widget.png?style=shield)
 [![Issues](https://img.shields.io/github/issues-raw/Twitter-Public-Analysis/Twitter-Public-Analysis.svg?maxAge=25000)](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/issues)
 [![PRs Welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/pulls)
