@@ -32,9 +32,6 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-    - name: Code Cov
-      run: |
-        bash <(curl -s https://codecov.io/bash)
 #    - name: Ensuring Examples Work
 #      run: |
 #        # Testing batch processing counting tweets
