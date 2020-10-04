@@ -23,7 +23,7 @@ jobs:
           pytest
       - name: Wemake Python Stylguide
         uses: wemake-services/wemake-python-styleguide@0.13.4
-        continue-on-error: true
+        continue-on-error: false
         with:
           reporter: 'github-pr-review'
         env:
