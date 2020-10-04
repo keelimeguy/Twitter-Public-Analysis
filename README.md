@@ -16,29 +16,10 @@ Getting started shouldn't be too hard. Here are the steps:
 
 `pip install -r requirements.txt`
 
-3. Configure the twitter settings
+3. And you're done with the initial setup!
 
-Follow the steps [here](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/blob/master/config/README.md) to add your twitter credentials. Don't worry, we're working on removing this step
+Great! Now you can work with Dozent (The powerful downloader that can download and preprocess the massive datasets!), and Morpheus (The robust set of tools that you'll use to process those massive datasets).
 
-4. We need to actually getting it running
+## Running tests (to make sure that our code works)
 
-`python sentiment_analysis_app.py --topic-counts=3 --tweets-count=100 --clean-tweets`
-
-4.5 Here's the `help` from the sentiment analysis app:
-```
-usage: sentiment_analysis_app.py [-h] [--topic-counts TOPICS_COUNT]
-                                 [--tweets-count TWEETS_COUNT]
-                                 [--clean-tweets]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --topic-counts TOPICS_COUNT
-                        number of topics to download for
-  --tweets-count TWEETS_COUNT
-                        number of tweets to grab per topic
-  --clean-tweets        clean the tweets before analyzing them
-```
-
-## Running tests
-
-`python -m unittest`
+`pytest`
