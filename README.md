@@ -2,9 +2,9 @@
 
 ![Build](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/workflows/Build/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ac5a9260af51489812d/maintainability)](https://codeclimate.com/github/Twitter-Public-Analysis/Twitter-Public-Analysis/maintainability)
+![Discord Shield](https://discordapp.com/api/guilds/729368876965429310/widget.png?style=shield)
 [![codecov](https://codecov.io/gh/Twitter-Public-Analysis/Twitter-Public-Analysis/branch/master/graph/badge.svg?token=FPV2J90ECP)](undefined)
 [![Issues](https://img.shields.io/github/issues-raw/Twitter-Public-Analysis/Twitter-Public-Analysis.svg?maxAge=25000)](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/issues)
-![Discord Shield](https://discordapp.com/api/guilds/729368876965429310/widget.png?style=shield)
 
 Hey! We're working on making a twitter analysis tool that can analyze tweets in real time and give us valuable insights
 
