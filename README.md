@@ -1,6 +1,7 @@
 # Twitter-Public-Analysis
 
 ![Build](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/workflows/Build/badge.svg)
+[![codecov](https://codecov.io/gh/Twitter-Public-Analysis/Twitter-Public-Analysis/branch/master/graph/badge.svg?token=FPV2J90ECP)](undefined)
 
 Hey! We're working on making a twitter analysis tool that can analyze tweets in real time and give us valuable insights
 
