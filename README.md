@@ -1,5 +1,13 @@
 # Twitter-Public-Analysis
 
+![Build](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/workflows/Build/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1ac5a9260af51489812d/maintainability)](https://codeclimate.com/github/Twitter-Public-Analysis/Twitter-Public-Analysis/maintainability)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Twitter-Public-Analysis/Twitter-Public-Analysis.svg?style=flat)]()
+[![Discord Shield](https://discordapp.com/api/guilds/729368876965429310/widget.png?style=shield)](https://discord.gg/Bmf7ZQ)
+[![Issues](https://img.shields.io/github/issues-raw/Twitter-Public-Analysis/Twitter-Public-Analysis.svg?maxAge=25000)](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/issues)
+[![PRs Welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/pulls)
+[![codecov](https://codecov.io/gh/Twitter-Public-Analysis/Twitter-Public-Analysis/branch/master/graph/badge.svg?token=FPV2J90ECP)](undefined)
+
 Hey! We're working on making a twitter analysis tool that can analyze tweets in real time and give us valuable insights
 
 Interested in working with us? Join our discord [here](https://discord.com/channels/729368876965429310/729368876965429313)!
@@ -16,45 +24,10 @@ Getting started shouldn't be too hard. Here are the steps:
 
 `pip install -r requirements.txt`
 
-3. Configure the twitter settings
+3. And you're done with the initial setup!
 
-Follow the steps [here](https://github.com/Twitter-Public-Analysis/Twitter-Public-Analysis/blob/master/config/README.md) to add your twitter credentials. Don't worry, we're working on removing this step
+Great! Now you can work with Dozent (The powerful downloader that can download and preprocess the massive datasets!), and Morpheus (The robust set of tools that you'll use to process those massive datasets). We'll link their repositories soon.
 
-4. We need to actually getting it running
+## Running tests (to make sure that our code works)
 
-`python sentiment_analysis_app.py --topic-counts=3 --tweets-count=100 --clean-tweets`
-
-4.5 Here's the `help` from the sentiment analysis app:
-```
-usage: sentiment_analysis_app.py [-h] [--topic-counts TOPICS_COUNT]
-                                 [--tweets-count TWEETS_COUNT]
-                                 [--clean-tweets]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --topic-counts TOPICS_COUNT
-                        number of topics to download for
-  --tweets-count TWEETS_COUNT
-                        number of tweets to grab per topic
-  --clean-tweets        clean the tweets before analyzing them
-```
-
-## Running tests
-
-`python -m unittest`
-
-## Common issues
-
-### Installation for Windows
-
-The torch dependency will likely need manually installed.
-
-1. Download PyTorch for your version from https://www.lfd.uci.edu/~gohlke/pythonlibs/#pytorch
-
-2. Install the downloaded wheel
-
-`pip install torch‑1.6.0‑cp36‑cp36m‑win_amd64.whl`
-
-3. You can now complete installation of the requirements
-
-`pip install -r requirements.txt`
+`pytest`

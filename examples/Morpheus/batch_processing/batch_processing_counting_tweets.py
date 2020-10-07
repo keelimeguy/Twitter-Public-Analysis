@@ -1,5 +1,5 @@
-from Morpheus.data_loading_tbd import get_files_list, read_compressed_bz2_json_file
-from Morpheus.batch_processing_tbd import process_in_batches_generator, process_in_batches
+from morpheus.batch_processing import Batches
+from morpheus.data_loading import DataLoading
 
 
 def counter(tweets):
@@ -11,9 +11,9 @@ def example_process_in_batches():
     Example function to show how process_in_batches works
     :return: returns the count of tweets
     """
-    files_lst = get_files_list('../../../data/*.json.bz2')
-    results = process_in_batches(files_lst, read_func=read_compressed_bz2_json_file, func_to_apply=counter,
-                                 verbose=False)
+    files_lst = DataLoading.get_files_list('../../../data/*.json.bz2')
+    results = Batches.process_in_batches(files_lst, read_func=DataLoading.read_compressed_bz2_json_file,
+                                         func_to_apply=counter, verbose=False)
     return results
 
 
@@ -23,8 +23,9 @@ def example_process_in_batches_generator():
     :return: returns the count of tweets
     """
 
-    files_lst = get_files_list('../../../data/*.json.bz2')
-    generator = process_in_batches_generator(files_lst, read_func=read_compressed_bz2_json_file, func_to_apply=counter)
+    files_lst = DataLoading.get_files_list('../../../data/*.json.bz2')
+    generator = Batches.process_in_batches_generator(files_lst, read_func=DataLoading.read_compressed_bz2_json_file,
+                                                     func_to_apply=counter)
     results = list(generator)
     return results
 
